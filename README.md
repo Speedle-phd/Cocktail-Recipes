@@ -1,70 +1,63 @@
-# Getting Started with Create React App
+# Cocktail Recipes
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A React and TypeScript app built with Vite.
 
-## Available Scripts
+## Getting started
 
-In the project directory, you can run:
+```sh
+npm install
+npm start
+```
 
-### `npm start`
+Vite serves the app at [http://localhost:5173](http://localhost:5173).
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Docker development
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+```sh
+docker compose --profile dev up --build dev
+```
 
-### `npm test`
+Open [http://localhost:5173](http://localhost:5173). The project directory is
+mounted into the container, so edits on your computer are reflected by Vite.
+Dependencies are installed in a separate Docker volume, not in the host's
+`node_modules`. The container runs `npm ci` on startup; restart it after changing
+`package.json` or `package-lock.json`.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If port 5173 is already in use, set `DEV_PORT` before starting Compose and use
+that port in the browser. You can copy `.env.example` to `.env` and set
+`DEV_PORT` there, or set it in PowerShell:
 
-### `npm run build`
+```powershell
+$env:DEV_PORT = "5174"
+docker compose --profile dev up --build dev
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Stop the development container with `Ctrl+C` or
+`docker compose --profile dev down`.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Docker production
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+```sh
+docker compose up -d --build
+```
 
-### `npm run eject`
+The production image serves the built app with Nginx. It listens on `PORT`,
+which defaults to `8080`. Copy `.env.example` to `.env` and set `PORT` to
+change both the host and container ports. After pulling updates, rebuild and
+recreate the production container with:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+```sh
+git pull
+docker compose up -d --build
+```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+Client-side routes fall back to `index.html`. The production image contains
+only the static build and web server; source files are not mounted. Stop it
+with `docker compose down`.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+## Scripts
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- `npm start` or `npm run dev`: start the development server.
+- `npm run build`: type-check and create a production build in `dist/`.
+- `npm run preview`: serve the production build locally.
+- `npm test`: run tests with Vitest.
