@@ -1,4 +1,12 @@
-export interface Cocktail {
+export interface CocktailSummary {
+  idDrink: string;
+  strDrink: string;
+  strDrinkThumb: string;
+  strAlcoholic?: string | null;
+  strCategory?: string | null;
+}
+
+export interface Cocktail extends CocktailSummary {
   [key: string]: string | null;
   idDrink: string;
   strDrink: string;

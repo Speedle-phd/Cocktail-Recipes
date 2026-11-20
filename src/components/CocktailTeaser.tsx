@@ -1,6 +1,6 @@
 import { FiArrowUpRight } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import type { Cocktail } from "../types";
+import type { CocktailSummary } from "../types";
 
 const CocktailTeaser = ({
   strCategory,
@@ -8,7 +8,7 @@ const CocktailTeaser = ({
   strDrinkThumb,
   idDrink,
   strAlcoholic,
-}: Cocktail) => (
+}: CocktailSummary) => (
   <article className="cocktail-card">
     <Link className="cocktail-card-link" to={`/cocktail/${idDrink}`}>
       <div className="cocktail-card-image">

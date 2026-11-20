@@ -28,7 +28,7 @@ em { font-weight: 400; }
 .skip-link:focus { top: 16px; }
 
 .site-header { border-bottom: 1px solid #e6e5d9; background: #f8f6ef; }
-.nav { min-height: 94px; display: flex; align-items: center; gap: 48px; }
+.nav { min-height: 94px; display: flex; align-items: center; gap: 30px; }
 .brand { display: flex; align-items: center; gap: 11px; flex-shrink: 0; }
 .brand-mark { font-size: 41px; line-height: 1; color: #e18864; }
 .brand-text { font-family: "DM Serif Display", Georgia, serif; font-size: 22px; line-height: 1; letter-spacing: -.5px; }
@@ -39,6 +39,8 @@ em { font-weight: 400; }
 .nav-link:hover, .nav-link-active { color: #173f39; }
 .nav-link-active::after { content: ""; height: 2px; position: absolute; bottom: 0; left: 0; right: 0; background: #d47d58; }
 .nav-count { display: grid; place-items: center; min-width: 19px; height: 19px; border-radius: 50%; color: #fff; background: #d47d58; font-size: 10px; }
+.theme-toggle { display: inline-flex; align-items: center; justify-content: center; gap: 7px; min-height: 42px; border: 1px solid #bfd0c3; border-radius: 4px; padding: 8px 12px; background: transparent; color: #173f39; font-size: 12px; font-weight: 700; }
+.theme-toggle:hover { background: #eaf0e8; }
 .nav-cta { display: flex; align-items: center; gap: 20px; border: 1px solid #bfd0c3; border-radius: 4px; padding: 13px 15px; font-size: 12px; font-weight: 700; white-space: nowrap; }
 .nav-cta:hover { background: #eaf0e8; }
 
@@ -75,6 +77,8 @@ em { font-weight: 400; }
 .featured-caption div > span { color: #7d8c80; font-size: 12px; }
 .featured-arrow, .card-arrow { display: grid; place-items: center; width: 43px; height: 43px; border: 1px solid #cdd9ce; border-radius: 50%; font-size: 19px; }
 .featured-state { display: flex; flex-direction: column; gap: 18px; align-items: center; justify-content: center; aspect-ratio: 1.18; padding: 30px; background: #e9eee5; color: #526e60; text-align: center; }
+.shuffle-button { display: inline-flex; align-items: center; gap: 9px; margin-top: 21px; padding: 10px 0; border: 0; border-bottom: 1px solid #b5c3b8; background: transparent; color: #173f39; font-size: 13px; font-weight: 700; }
+.shuffle-button:hover:not(:disabled) { color: #a85e42; border-color: currentColor; }
 .discovery-strip { background: #e6ede3; }
 .discovery-inner { display: grid; grid-template-columns: auto 1fr 1fr auto; align-items: center; gap: 24px; padding-block: 33px; }
 .strip-icon { display: grid; place-items: center; width: 54px; height: 54px; border-radius: 50%; background: #d4e1d3; font-size: 21px; }
@@ -89,6 +93,7 @@ em { font-weight: 400; }
 .field label { display: block; margin-bottom: 9px; color: #667f70; font-size: 9px; font-weight: 700; letter-spacing: 1.4px; }
 .search-field { flex: 1; }
 .type-field { width: 215px; }
+.search-hint { margin-top: 12px; color: #627b6a; font-size: 12px; line-height: 1.6; }
 .input-wrap { position: relative; }
 .input-wrap svg { position: absolute; top: 50%; left: 16px; transform: translateY(-50%); color: #799081; }
 .field input, .field select { width: 100%; height: 52px; border: 1px solid #d5e0d4; border-radius: 3px; background: #fff; color: #173f39; padding: 0 15px; }
@@ -147,6 +152,7 @@ em { font-weight: 400; }
 .footer-brand { font-family: "DM Serif Display", Georgia, serif; font-size: 19px; }
 .footer-brand em { color: #e5a181; }
 .footer-inner p { color: #a9beb0; font-size: 12px; }
+.footer-inner p a { color: #d5e4d8; text-decoration: underline; text-underline-offset: 3px; }
 .footer-inner > a { font-size: 12px; font-weight: 700; }
 .footer-inner > a span { color: #e5a181; margin-left: 5px; }
 
@@ -158,13 +164,18 @@ em { font-weight: 400; }
   .hero h1 { font-size: clamp(49px, 7vw, 67px); }
   .discovery-inner { grid-template-columns: auto 1fr auto; }
   .discovery-inner > p { display: none; }
+  .search-panel { flex-wrap: wrap; }
+  .search-field { min-width: 180px; }
+}
+@media (max-width: 760px) {
+  .nav { min-height: 0; flex-wrap: wrap; gap: 0; padding-top: 17px; }
+  .brand { margin-bottom: 14px; }
+  .nav-links { order: 3; width: 100%; min-height: 48px; justify-content: space-between; gap: 12px; }
+  .theme-toggle { margin: 0 0 14px auto; }
+  .nav-link { font-size: 12px; }
 }
 @media (max-width: 650px) {
   .shell { width: calc(100% - 36px); }
-  .nav { min-height: 0; flex-wrap: wrap; gap: 0; padding-top: 17px; }
-  .brand { margin-bottom: 14px; }
-  .nav-links { width: 100%; min-height: 48px; justify-content: space-between; gap: 12px; }
-  .nav-link { font-size: 12px; }
   .hero { grid-template-columns: 1fr; gap: 38px; padding-block: 46px 55px; }
   .hero-copy { padding: 0; }
   .hero h1 { font-size: clamp(47px, 12vw, 68px); letter-spacing: -1.7px; }
@@ -187,3 +198,68 @@ em { font-weight: 400; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 }
+
+html[data-theme="dark"] { color-scheme: dark; color: #e8eee6; background: #12201d; }
+html[data-theme="dark"] .site-header { background: #172a25; border-color: #385047; }
+html[data-theme="dark"] .nav-link { color: #b7c8bb; }
+html[data-theme="dark"] .nav-link:hover,
+html[data-theme="dark"] .nav-link-active { color: #fff7ea; }
+html[data-theme="dark"] .nav-cta,
+html[data-theme="dark"] .theme-toggle { color: #e8eee6; border-color: #597167; }
+html[data-theme="dark"] .nav-cta:hover,
+html[data-theme="dark"] .theme-toggle:hover { background: #30483e; }
+html[data-theme="dark"] .eyebrow,
+html[data-theme="dark"] .featured-caption p,
+html[data-theme="dark"] .card-category,
+html[data-theme="dark"] .recipe-section-title > span,
+html[data-theme="dark"] .text-link span { color: #efa989; }
+html[data-theme="dark"] .hero h1 em,
+html[data-theme="dark"] .page-heading h1 em,
+html[data-theme="dark"] .empty-state h1 em,
+html[data-theme="dark"] .brand-text em { color: #efa989; }
+html[data-theme="dark"] .hero-description,
+html[data-theme="dark"] .page-heading > p:last-child,
+html[data-theme="dark"] .discovery-inner > p,
+html[data-theme="dark"] .recipe-section > p,
+html[data-theme="dark"] .featured-caption div > span,
+html[data-theme="dark"] .hero-note,
+html[data-theme="dark"] .featured-topline,
+html[data-theme="dark"] .results-heading > span,
+html[data-theme="dark"] .back-link,
+html[data-theme="dark"] .search-hint { color: #b6c8ba; }
+html[data-theme="dark"] .hero-note strong { color: #dce8dd; }
+html[data-theme="dark"] .button-dark { color: #14251e; background: #d6e5d2; }
+html[data-theme="dark"] .button-dark:hover { background: #f0f5e9; }
+html[data-theme="dark"] .button-outline,
+html[data-theme="dark"] .shuffle-button { color: #e8eee6; border-color: #799387; }
+html[data-theme="dark"] .button-outline:hover { background: #30483e; }
+html[data-theme="dark"] .shuffle-button:hover:not(:disabled) { color: #efa989; }
+html[data-theme="dark"] .discovery-strip,
+html[data-theme="dark"] .search-panel,
+html[data-theme="dark"] .serve-note,
+html[data-theme="dark"] .featured-state { background: #233d33; color: #dce8dd; }
+html[data-theme="dark"] .strip-icon { background: #3a5849; }
+html[data-theme="dark"] .featured-image,
+html[data-theme="dark"] .cocktail-card-image { background: #30483e; }
+html[data-theme="dark"] .field label,
+html[data-theme="dark"] .serve-note span:first-child { color: #bfd0c1; }
+html[data-theme="dark"] .field input,
+html[data-theme="dark"] .field select { background: #182b25; border-color: #587365; color: #f0f5ed; }
+html[data-theme="dark"] .field input::placeholder { color: #a9bbad; }
+html[data-theme="dark"] .input-wrap svg { color: #b6c8ba; }
+html[data-theme="dark"] .results-heading,
+html[data-theme="dark"] .recipe-divider,
+html[data-theme="dark"] .ingredients-list li { border-color: #40594c; }
+html[data-theme="dark"] .card-tag,
+html[data-theme="dark"] .recipe-tags span { border-color: #668072; color: #c3d2c5; }
+html[data-theme="dark"] .card-arrow { background: #e7eee2; color: #173f39; }
+html[data-theme="dark"] .featured-arrow { border-color: #799387; }
+html[data-theme="dark"] .empty-state { color: #b6c8ba; }
+html[data-theme="dark"] .empty-state h1,
+html[data-theme="dark"] .empty-state h3,
+html[data-theme="dark"] .back-link:hover { color: #f0f5ed; }
+html[data-theme="dark"] .ingredients-list li { color: #e1ebe0; }
+html[data-theme="dark"] .ingredients-list li span:last-child { color: #b6c8ba; }
+html[data-theme="dark"] .remove-button { color: #efa989; }
+html[data-theme="dark"] .recipe-image-note { color: #173f39; }
+html[data-theme="dark"] .site-footer { background: #0c1713; }

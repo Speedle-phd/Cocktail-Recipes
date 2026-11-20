@@ -11,6 +11,16 @@ npm start
 
 Vite serves the app at [http://localhost:5173](http://localhost:5173).
 
+## Features and cocktail data
+
+- Switch between light and dark mode in the navigation. The choice is saved
+  locally; the initial theme follows the device preference.
+- Shuffle the home-page pick, search as you type by cocktail name, and save
+  favorites in the browser.
+- Recipes come from [TheCocktailDB's V1 API](https://www.thecocktaildb.com/api.php).
+  The app uses the API's development/educational test key `1`. TheCocktailDB
+  requires a production key for public app-store releases.
+
 ## Docker development
 
 ```sh

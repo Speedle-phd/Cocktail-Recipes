@@ -7,6 +7,7 @@ const useFetch = (url: string) => {
   const [cocktail, setCocktail] = useState<CocktailResponse>({ drinks: null });
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
+  const [requestNumber, setRequestNumber] = useState(0);
 
   useEffect(() => {
     let active = true;
@@ -29,9 +30,15 @@ const useFetch = (url: string) => {
     return () => {
       active = false;
     };
-  }, [url]);
+  }, [url, requestNumber]);
 
-  return { cocktail, loading, error };
+  const refetch = () => {
+    setLoading(true);
+    setError(false);
+    setRequestNumber((previous) => previous + 1);
+  };
+
+  return { cocktail, loading, error, refetch };
 };
 
 export default useFetch;

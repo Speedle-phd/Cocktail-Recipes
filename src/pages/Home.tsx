@@ -1,9 +1,9 @@
-import { FiArrowRight, FiArrowUpRight, FiSearch } from "react-icons/fi";
+import { FiArrowRight, FiArrowUpRight, FiRefreshCw, FiSearch } from "react-icons/fi";
 import { Link } from "react-router-dom";
 import useFetch from "../customHooks/useFetch";
 
 const Home = () => {
-  const { cocktail: { drinks }, loading, error } = useFetch("/random.php");
+  const { cocktail: { drinks }, loading, error, refetch } = useFetch("/random.php");
   const drink = drinks?.[0];
 
   return (
@@ -30,7 +30,7 @@ const Home = () => {
           {loading ? (
             <div className="featured-state" role="status"><span className="loading-spinner" /> Finding your next favorite...</div>
           ) : error ? (
-            <div className="featured-state" role="alert">We couldn't load a drink. Please refresh the page.</div>
+            <div className="featured-state" role="alert">We couldn't load a drink. Try again below.</div>
           ) : drink ? (
             <Link className="featured-link" to={`/cocktail/${drink.idDrink}`}>
               <div className="featured-image">
@@ -43,8 +43,11 @@ const Home = () => {
               </div>
             </Link>
           ) : (
-            <div className="featured-state">No drink found this time. Please refresh the page.</div>
+            <div className="featured-state">No drink found this time. Try again below.</div>
           )}
+          <button className="shuffle-button" onClick={refetch} disabled={loading}>
+            <FiRefreshCw aria-hidden="true" /> {error || (!loading && !drink) ? "Try again" : "Pick another cocktail"}
+          </button>
         </div>
       </section>
       <section className="discovery-strip">

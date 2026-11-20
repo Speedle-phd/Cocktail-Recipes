@@ -7,7 +7,7 @@ const Footer = () => (
         <span className="footer-mark" aria-hidden="true">✳</span>
         <span className="footer-brand">the cocktail <em>club</em></span>
       </div>
-      <p>Good drinks. Better moments.</p>
+      <p>Good drinks. Better moments. Recipes from <a href="https://www.thecocktaildb.com/" target="_blank" rel="noreferrer">TheCocktailDB</a>.</p>
       <Link to="/search">Explore the recipes <span aria-hidden="true">↗</span></Link>
     </div>
   </footer>
