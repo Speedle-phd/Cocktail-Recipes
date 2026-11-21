@@ -12,7 +12,7 @@ FROM dependencies AS build
 COPY . .
 RUN npm run build
 
-FROM nginx:alpine AS production
+FROM nginx:1.31-alpine AS production
 ENV PORT=8080
 ENV NGINX_ENVSUBST_FILTER=^PORT$
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
